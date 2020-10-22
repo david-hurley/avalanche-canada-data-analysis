@@ -2,7 +2,7 @@ numpy==1.19.2
 pandas==1.1.3
 python-dateutil==2.8.1
 pytz==2020.1
--e git+git@github.com:david-hurley/avalanche-canada-data-analysis.git@a7674110a4527a00b2a1adc45a71e4631a2e7f5b#egg=scripts
+-e git+git@github.com:david-hurley/avalanche-canada-data-analysis.git@f5343dc841e9202812180d54c1c379346df7f6e8#egg=scripts
 selenium==3.141.0
 six==1.15.0
 urllib3==1.25.10
