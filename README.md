@@ -1,6 +1,13 @@
 # Avalanche Canada data analysis toolkit
 
-The Avalanche Canada data analysis toolkit is a collection of Python files for retrieving, processing, and visualizing historically forecasted Avalanche Canada danger ratings for select forecast regions and dates. The Avalanche Canada forecast archive can be found [HERE](https://www.avalanche.ca/forecasts/archives). 
+The Avalanche Canada data analysis toolkit is a collection of Python files for retrieving, processing, and visualizing historically forecasted Avalanche Canada danger ratings for select forecast regions and dates. Specifically, this toolkit provides a method to scrape danger rating data and examines danger rating statistics and anamolies between current day and 1- and 2-day out forecasted dagner ratings. 
+
+## Key Terms and Links
+* The Avalanche Canada forecast archive can be found [HERE](https://www.avalanche.ca/forecasts/archives). 
+* Current Conditions - the present days danger ratings as forecasted by Avalanche Canada
+* Current Plus1 Conditions - tomorrows danger ratings (i.e. one day ahead of current conditions) as forecasted by Avalanche Canada
+* Current Plus2 Conditions - day after tomorrows danger ratings (i.e. two days ahead of current conditions) as forecasted by Avalanche Canada
+* Forecast Anamoly - percentage of time that a 1- or 2-day out forecasted danger rating differs or agrees with current conditions. This provides insight into the forecast confidence and conservativeness of the forecast (i.e. do they forecast a higher danger rating than what is presented the day of).   
 
 ## Objective
 The purpose of this project is ________. (Describe the main goals of the project and potential civic impact. Limit to a short paragraph, 3-6 Sentences)
