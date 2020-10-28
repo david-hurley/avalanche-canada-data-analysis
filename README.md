@@ -1,22 +1,15 @@
 # Avalanche Canada data analysis toolkit
 
-The Avalanche Canada data analysis toolkit is a collection of Python files for retrieving, processing, and visualizing historically forecasted Avalanche Canada danger ratings for select forecast regions and dates. Specifically, this toolkit provides a method to scrape danger rating data and examines danger rating statistics and anamolies between current day and 1- and 2-day out forecasted dagner ratings. 
+The Avalanche Canada data analysis toolkit is a collection of Python files for retrieving, processing, and visualizing [historically forecasted Avalanche Canada](https://www.avalanche.ca/forecasts/archives) danger ratings for select forecast regions and dates. Specifically, this toolkit provides a method to scrape danger rating data and examines danger rating statistics and anamolies between current day and 1- and 2-day out forecasted dagner ratings. 
 
-## Key Terms and Links
-* The Avalanche Canada forecast archive can be found [HERE](https://www.avalanche.ca/forecasts/archives). 
+## Key Terms
 * Current Conditions - the present days danger ratings as forecasted by Avalanche Canada
 * Current Plus1 Conditions - tomorrows danger ratings (i.e. one day ahead of current conditions) as forecasted by Avalanche Canada
 * Current Plus2 Conditions - day after tomorrows danger ratings (i.e. two days ahead of current conditions) as forecasted by Avalanche Canada
-* Forecast Anamoly - percentage of time that a 1- or 2-day out forecasted danger rating differs or agrees with current conditions. This provides insight into the forecast confidence and conservativeness of the forecast (i.e. do they forecast a higher danger rating than what is presented the day of).   
-
-## Objective
-The purpose of this project is ________. (Describe the main goals of the project and potential civic impact. Limit to a short paragraph, 3-6 Sentences)
-
-### Partner
-* [Name of Partner organization/Government department etc..]
-* Website for partner
-* Partner contact: [Name of Contact], [slack handle of contact if any]
-* If you do not have a partner leave this section out
+* Forecast Anamoly - percentage of time that a 1- or 2-day out forecasted danger rating differs or agrees with current conditions. This provides insight into the forecast confidence and conservativeness of the forecast (i.e. do they forecast a higher danger rating than what is presented the day of)
+* Danger Ratings - avalanche hazard on a scale from 1 (lowest) to 5 (highest)
+* Forecast Region - geographic area that Avalanche Canada forecast applies
+* Alpine, Treeline, Belowtree - elevation the forecast applies (i.e. alpine is above treeline, treeline is sparse trees, belowtree is forested)
 
 ### Methods Used
 * Inferential Statistics
