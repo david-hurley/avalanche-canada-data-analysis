@@ -27,7 +27,7 @@ The Avalanche Canada data analysis toolkit is a collection of Python files for r
 5. Install dependencies by executing `pip install -r requirements.txt` in a command prompt 
 
 ## Scraping Avalanche Canada Data
-Code to scrape and save historical Avalanche Canada danger ratings for day of and 1- and 2-day out conditions for any forecast region and date range. Raw data is saved to `data/raw`. 
+Code to scrape and save historical Avalanche Canada danger ratings for day of and 1- and 2-day out conditions for any forecast region and date range. Raw data is saved to `data/raw`. Scraping is performed with Python and Selenium.
 
 #### Test Scrape
 Scraping involves launching a web browser, in this case Firefox, and extracting information from a desired page path. Sometimes the page path can change or break so it's a good idea to test the scraping code prior to use. 
@@ -54,3 +54,12 @@ Perform the following to clean raw data:
 3. Execute `python clean_scraped_data.py`. Cleaned data sets are save to `data/cleaned`
 
 ## Analyze and Visualize Avalanche Canada Data
+
+Jupyter Notebook to perform data analysis and data visualization on cleaned dataset. 
+
+Perform the following:
+1. Launch Jupyter Notebook and navigate to `notebooks` and open file `2020_10_10_dh_clean_explore_data.ipynb`
+2. Rename file and save
+3. Follow instruction in notebook to point to desired cleaned files and run code
+
+Alternativley, this can be run using `2020_10_10_dh_clean_explore_data.py`
