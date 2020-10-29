@@ -1,0 +1,8 @@
+{
+	"comment": "this dictionary contains the inputs for data cleaning",
+	"comment": "filenames should refer to csv files in data/raw",
+	"region": "sea_to_sky",
+	"current_condition_filename": "current_avalanche_conditions_sea_to_sky_RAW.csv",
+	"current_plus1_condition_filename": "current_plus1_avalanche_conditions_sea_to_sky_RAW.csv",
+	"current_plus2_condition_filename": "current_plus2_avalanche_conditions_sea_to_sky_RAW.csv"
+} 

@@ -2,7 +2,8 @@
 	"comment": "this dictionary contains the necessary information to run scrape.py",
 	"comment": "region must match avalanche canada defined regions",
 	"comment": "dates must be in ISO 8601 format",
-	"region": "sea-to-sky",
-	"start_date": "2011-12-02",
-	"end_date": "2020-04-10"
+	"region": "south-coast",
+	"start_date": "2020-01-02",
+	"end_date": "2020-01-10", 
+	"show_browser_window": "Yes"
 }

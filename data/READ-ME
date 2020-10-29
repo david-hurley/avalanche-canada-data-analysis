@@ -1,0 +1,7 @@
+# READ ME
+
+Datasets contained in the cleaned and raw folder are danger ratings for select Avalanche Canada forecasting regions during available forecasting dates. Only current conditions contain problem text discussing current avalanche problems and snowpack. 
+
+- Current: Day of Conditions or Forecast (i.e. todays danger rating)
+- Current_Plus1: 1 Day Out Conditions or Forecast (i.e. tomorrows danger rating)
+- Current_Plus2: 2 Day Out Conditions or Forecast (i.e. day after tomorrow danger rating)

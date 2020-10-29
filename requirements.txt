@@ -9,7 +9,7 @@ pyparsing==2.4.7
 python-dateutil==2.8.1
 pytz==2020.1
 scipy==1.5.3
--e git+git@github.com:david-hurley/avalanche-canada-data-analysis.git@74ec00b7c2c56f32804690121f44fe1cb28eab03#egg=scripts
+-e git+git@github.com:david-hurley/avalanche-canada-data-analysis.git@64fd59861bb4bcaa90e986d99bd61d613159c13f#egg=scripts
 seaborn==0.11.0
 selenium==3.141.0
 six==1.15.0

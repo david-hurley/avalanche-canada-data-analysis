@@ -8,8 +8,9 @@
 import pandas as pd
 import time
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
-def scrape(dates, region):
+def scrape(dates, region, browser_viz):
     """ Scrape current and forecast conditions and problem text from AvalancheCanada.ca historical page """
 
     # empty list for current, current+1, current+2 forecast conditions and text problems
@@ -18,9 +19,16 @@ def scrape(dates, region):
     current_plus_2_conditions = []
     problem_conditions = []
 
+    # webdriver options
+    options = Options()
+    if browser_viz == 'Yes':
+        options.headless = False
+    else: 
+        options.headless = True
+
     # initialize selenium web driver
     base_url = 'https://www.avalanche.ca/forecasts/archives/{}/{}'
-    driver = webdriver.Firefox()
+    driver = webdriver.Firefox(options=options)
     driver.get(base_url.format(region, dates[0]))
     time.sleep(3)  # slight pause for driver to load
 

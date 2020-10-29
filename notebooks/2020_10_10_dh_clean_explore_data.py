@@ -2,10 +2,10 @@
 # coding: utf-8
 
 # # Notebook Overview
-# The objective of this notebook is to clean and explore historical avalanche danger ratings for the Sea to Sky region as reported by Avalanche Canada (https://www.avalanche.ca/). Specifically, this notebook creates a final cleaned dataset and attempts to assess anomalies between day of danger ratings and one- and two-day out forecasted danger ratings. 
+# The objective of this notebook is to explore historical avalanche danger ratings as reported by Avalanche Canada (https://www.avalanche.ca/). Specifically, this notebook attempts to assess anomalies between day of danger ratings and one- and two-day out forecasted danger ratings. 
 # 
 # #### The Data
-# The dataset covers the period 2011-11-02 through 2020-04-15 and includes day of danger ratings and one- and two-day out forecasted danger ratings. Additionally, any snowpack problems, as written by the forecaster, are included for day of danger ratings. The dataset was scraped from the Avalanche Canada forecast archives (https://www.avalanche.ca/forecasts/archives) using Selenium and Python. 
+# The dataset is created with scrape_export_data.py and cleaned with clean_scraped_data.py. The dataset covers the period 2011-11-02 through 2020-04-15 and includes day of danger ratings and one- and two-day out forecasted danger ratings. Additionally, any snowpack problems, as written by the forecaster, are included for day of danger ratings. The dataset was scraped from the Avalanche Canada forecast archives (https://www.avalanche.ca/forecasts/archives) using Selenium and Python. 
 # 
 # #### Key Terms
 # A few key terms that are important to understand in this analysis:
@@ -26,7 +26,7 @@
 
 # ## Library Imports
 
-# In[19]:
+# In[1]:
 
 
 import pandas as pd
@@ -40,7 +40,7 @@ from collections import Counter
 
 # ## Helper Functions
 
-# In[20]:
+# In[2]:
 
 
 # helper functions
@@ -62,16 +62,16 @@ def zero_matrix():
 
 # ## Load Dataset
 
-# In[21]:
+# In[3]:
 
 
 # define absolute path to raw data folder
 raw_data_root_path = os.path.abspath('../data/raw')
 
 # raw data filenames
-current_conditions_file = 'current_avalanche_conditions_sea_to_sky.csv'  # day of forecast
-current_plus1_conditions_file = 'current_plus1_avalanche_conditions_sea_to_sky.csv'  # tomorrow forecast
-current_plus2_conditions_file = 'current_plus2_avalanche_conditions_sea_to_sky.csv'  # day after tomorrow forecast
+current_conditions_file = 'current_avalanche_conditions_sea_to_sky_RAW.csv'  # day of forecast
+current_plus1_conditions_file = 'current_plus1_avalanche_conditions_sea_to_sky_RAW.csv'  # tomorrow forecast
+current_plus2_conditions_file = 'current_plus2_avalanche_conditions_sea_to_sky_RAW.csv'  # day after tomorrow forecast
   
 # define absolute path to raw data files
 current_conditions_path = os.path.join(raw_data_root_path, current_conditions_file)
@@ -84,9 +84,15 @@ df_raw_current_plus1 = pd.read_csv(current_plus1_conditions_path, parse_dates=['
 df_raw_current_plus2 = pd.read_csv(current_plus2_conditions_path, parse_dates=['date_valid'])
 
 
+# In[7]:
+
+
+df_raw_current.to_csv('test.csv', index=False)
+
+
 # ## Clean Dataset
 
-# In[22]:
+# In[ ]:
 
 
 # list of dataframes to clean
@@ -120,9 +126,17 @@ df_cleaned_current_plus2.to_csv('../data/cleaned/current_plus2_avalanche_danger_
 
 # ## Explore Data
 
+# In[ ]:
+
+
+df_cleaned_current = pd.read_csv('../data/cleaned/current_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
+df_cleaned_current_plus1 = pd.read_csv('../data/cleaned/current_plus1_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
+df_cleaned_current_plus2 = pd.read_csv('../data/cleaned/current_plus2_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
+
+
 # #### Custom Colormap
 
-# In[67]:
+# In[ ]:
 
 
 colors = [(82/255, 186/255, 74/255), (255/255, 243/255, 0/255), (247/255, 146/255, 24/255), 
@@ -131,7 +145,7 @@ colors = [(82/255, 186/255, 74/255), (255/255, 243/255, 0/255), (247/255, 146/25
 
 # #### Visualization of "Day of Conditions" in Sea to Sky Region 2011-2020
 
-# In[140]:
+# In[ ]:
 
 
 # percent occurence of each avalanche condition for each elevation
@@ -189,7 +203,7 @@ plt.savefig('../figures/avalanche-danger-ratings-sea-to-sky-2011-2020.png')
 
 # #### Visualization of "Day of Conditions" by year
 
-# In[145]:
+# In[ ]:
 
 
 # list of years in dataset
@@ -261,7 +275,7 @@ plt.savefig('../figures/avalanche-danger-ratings-by-season-sea-to-sky-2011-2020.
 
 # #### Visualization of "Day of Conditions" by month
 
-# In[150]:
+# In[ ]:
 
 
 # list of months in dataset
@@ -329,7 +343,7 @@ plt.savefig('../figures/avalanche-danger-ratings-by-month-sea-to-sky-2011-2020.p
 
 # #### Most common avalanche problems
 
-# In[148]:
+# In[ ]:
 
 
 # types of problems to search in text based on Simon Fraser document
@@ -364,7 +378,7 @@ plt.savefig('../figures/frequency-of-avalanche-problem-types-sea-to-sky-2011-202
 
 # #### Danger Rating Forecast Anomaly
 
-# In[152]:
+# In[ ]:
 
 
 # merge day of and forecasted datasets
