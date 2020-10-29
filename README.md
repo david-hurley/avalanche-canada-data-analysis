@@ -27,15 +27,18 @@ The Avalanche Canada data analysis toolkit is a collection of Python files for r
 5. Install dependencies by executing `pip install -r requirements.txt` in a command prompt 
 
 ## Scraping Avalanche Canada Data
-Scraping involves launching a web browser, in this case Firefox, extracting information from a desired page path, and saving data. This code scrapes and saves historical Avalanche Canada danger ratings for day of and 1- and 2-day out conditions for any forecast region and date range. Raw data is saved to `data/raw` and cleaned data is saved to `data/cleaned`. 
+Code to scrape and save historical Avalanche Canada danger ratings for day of and 1- and 2-day out conditions for any forecast region and date range. Raw data is saved to `data/raw`. 
 
 #### Test Scrape
-Prior to scraping data it's a good idea to test the scraping code as the Avalanche Canada page paths may have changed. Perform the following to test the scraping code:
+Scraping involves launching a web browser, in this case Firefox, and extracting information from a desired page path. Sometimes the page path can change or break so it's a good idea to test the scraping code prior to use. 
+
+Perform the following to test the scraping code:
 1. Open a command prompt and navigate to the root directory of the cloned repo (likely `avalanche-canada-data-analysis`)
 2. Execute `python -m unittest discover tests`
 3. If the code passes the tests an `OK` will be displayed (note, this may take 10-15 seconds)
 
 #### Scrape New Data
+
 Perform the following to scrape new data:
 1. Open `scrape_inputs.json` and set the desired forecast region and date range to scrape. Also, determine if a web browser should be displayed while scraping (suggest yes as it provides feedback). Note, the forecast region must match EXACTLY with the Avalanche Canada regions. To check a forecast region name go [HERE](https://www.avalanche.ca/forecasts/archives) and select the forecast region then confirm the forecast region name displayed in the URL address bar (i.e. this might be `sea-to-sky` or `south-coast-inland`). 
 2. Open a command prompt or IDE and navigate to `scripts`
@@ -43,5 +46,11 @@ Perform the following to scrape new data:
 
 ## Clean Scraped Avalanche Canada Data
 
+Code to clean missing data, remove gaps in the record, and save cleaned data to `data/cleaned`
+
+Perform the following to clean raw data:
+1. Open `clean_inputs.json` and point to the desired files to edit and set the forecast region. The filenames must match files in `data/raw`
+2. Open a command prompt or IDE and navigate to `scripts`
+3. Execute `python clean_scraped_data.py`. Cleaned data sets are save to `data/cleaned`
 
 ## Analyze and Visualize Avalanche Canada Data
