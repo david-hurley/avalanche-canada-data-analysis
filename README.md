@@ -66,4 +66,4 @@ Perform the following:
 
 Alternativley, this can be run using `2020_10_10_dh_clean_explore_data.py`
 
-![test]("figures/avalanche-danger-ratings-sea-to-sky-2011-2020.png")
+![test](https://github.com/david-hurley/avalanche-canada-data-analysis/blob/master/figures/avalanche-danger-ratings-sea-to-sky-2011-2020.png)
