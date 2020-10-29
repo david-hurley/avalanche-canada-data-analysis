@@ -2,6 +2,8 @@
 
 The Avalanche Canada data analysis toolkit is a collection of Python files for retrieving, processing, and visualizing [historically forecasted Avalanche Canada](https://www.avalanche.ca/forecasts/archives) danger ratings for select forecast regions and dates. Specifically, this toolkit provides a method to scrape danger rating data and examines danger rating statistics and anamolies between current day and 1- and 2-day out forecasted dagner ratings. 
 
+For help or questions/comments contact [hurleyldave@gmail.com](hurleyldave@gmail.com) or message me on [Medium](https://medium.com/@davidhurley_48402)
+
 ## Overview
 ### Key Terms
 * Current Conditions - the present days danger ratings as forecasted by Avalanche Canada
@@ -63,3 +65,5 @@ Perform the following:
 3. Follow instruction in notebook to point to desired cleaned files and run code
 
 Alternativley, this can be run using `2020_10_10_dh_clean_explore_data.py`
+
+![test]("figures/avalanche-danger-ratings-sea-to-sky-2011-2020.png")
