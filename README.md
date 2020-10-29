@@ -27,9 +27,15 @@ The Avalanche Canada data analysis toolkit is a collection of Python files for r
 5. Install dependencies by executing `pip install -r requirements.txt` in a command prompt 
 
 ## Scraping Avalanche Canada Data
-
+Scraping involves launching a web browser, in this case Firefox, extracting information from a desired page path, and saving data. The code in this scrapes and saves historical Avalanche Canada danger ratings for any forecast region and date range. Raw data is saved to `data/raw` and cleaned data is saved to `data/cleaned`. 
 
 #### Test Scrape
+Prior to scraping data it's a good idea to test the scraping code as the Avalanche Canada page paths may have changed. Perform the following to test the scraping code:
+1. Open a command prompt and navigate to the root directory of the cloned repo (likely `avalanche-canada-data-analysis`)
+2. Execute `python -m unittest discover tests`
+3. If the code passes the tests an `OK` will be displayed (note, this may take 10-15 seconds)
+
+
 
 
 #### Scrape New Data
