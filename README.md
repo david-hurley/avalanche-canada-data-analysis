@@ -60,9 +60,11 @@ Perform the following to clean raw data:
 Jupyter Notebook to perform data analysis and data visualization on cleaned dataset. 
 
 Perform the following:
-1. Launch Jupyter Notebook and navigate to `notebooks` and open file `2020_10_10_dh_clean_explore_data.ipynb`
-2. Rename file and save
-3. Follow instruction in notebook to point to desired cleaned files and run code
+1. Open a command prompt in the root directory
+2. Execute `ipython kernel install --user --name=venv`, replace `venv` with the name of your virtual environment
+3. Launch Jupyter Notebook (`jupyter notebook` in the command prompt) and navigate to `notebooks` and open file `2020_10_10_dh_clean_explore_data.ipynb`
+4. In the toolbar select `kernel` and choose `venv`
+5. Follow instruction in notebook to point to desired cleaned files and run code
 
 Alternativley, this can be run using `2020_10_10_dh_clean_explore_data.py`
 
