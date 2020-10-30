@@ -4,8 +4,14 @@
 # # Notebook Overview
 # The objective of this notebook is to explore historical avalanche danger ratings as reported by Avalanche Canada (https://www.avalanche.ca/). Specifically, this notebook attempts to assess anomalies between day of danger ratings and one- and two-day out forecasted danger ratings. 
 # 
+# #### Notebook Outline
+# A basic outline for the notebook is as follows:
+# 1. Load data
+# 3. Explore Data - visualize danger rating data
+# 4. Data Analysis - assess forecasted danger rating anomalies
+# 
 # #### The Data
-# The dataset is created with scrape_export_data.py and cleaned with clean_scraped_data.py. The dataset covers the period 2011-11-02 through 2020-04-15 and includes day of danger ratings and one- and two-day out forecasted danger ratings. Additionally, any snowpack problems, as written by the forecaster, are included for day of danger ratings. The dataset was scraped from the Avalanche Canada forecast archives (https://www.avalanche.ca/forecasts/archives) using Selenium and Python. 
+# The dataset is created with scrape_export_data.py and cleaned with clean_scraped_data.py. Data includes day of and 1- and 2-day out forecasted danger ratings. Additionally, any snowpack problems, as written by the forecaster, are included for day of danger ratings.
 # 
 # #### Key Terms
 # A few key terms that are important to understand in this analysis:
@@ -17,16 +23,13 @@
 # * Below Treeline - Elevations in the trees
 # * Forecast Anamoly - Difference between forecasted value and observed/reported value.
 # 
-# #### Notebook Outline
-# A basic outline for the notebook is as follows:
-# 1. Load data
-# 2. Clean data
-# 3. Explore Data - visualize danger rating data
-# 4. Data Analysis - assess forecasted danger rating anomalies
+# #### Getting Started
+# 1. In the Load Data section define the filenames of the cleaned dataset to analyze and visualize
+# 2. Run all cells, figures are exported to figure folder
 
 # ## Library Imports
 
-# In[1]:
+# In[10]:
 
 
 import pandas as pd
@@ -40,17 +43,10 @@ from collections import Counter
 
 # ## Helper Functions
 
-# In[2]:
+# In[11]:
 
 
 # helper functions
-def percent_missing(df, name):
-    '''function to compute the percent NaN data in each column of a dataframe'''
-    
-    perc_missing = df.isna().sum() / len(df) * 100
-    
-    return print('Percent Missing in Each Column Before Filtering:', name, '\n \n', perc_missing, '\n')
-
 def zero_matrix():
     '''function to create a zero matrix for seaborn heatmap plotting'''
     
@@ -62,81 +58,33 @@ def zero_matrix():
 
 # ## Load Dataset
 
-# In[3]:
+# In[12]:
 
 
-# define absolute path to raw data folder
-raw_data_root_path = os.path.abspath('../data/raw')
+# define absolute path to cleaned data folder
+raw_data_root_path = os.path.abspath('../data/cleaned')
 
-# raw data filenames
-current_conditions_file = 'current_avalanche_conditions_sea_to_sky_RAW.csv'  # day of forecast
-current_plus1_conditions_file = 'current_plus1_avalanche_conditions_sea_to_sky_RAW.csv'  # tomorrow forecast
-current_plus2_conditions_file = 'current_plus2_avalanche_conditions_sea_to_sky_RAW.csv'  # day after tomorrow forecast
+# cleaned data filenames - CHANGE THIS TO MATCH THE FILES YOU WANT TO SHOW
+current_conditions_file = 'current_avalanche_danger_ratings_sea_to_sky_CLEANED.csv'  
+current_plus1_conditions_file = 'current_plus1_avalanche_danger_ratings_sea_to_sky_CLEANED.csv' 
+current_plus2_conditions_file = 'current_plus2_avalanche_danger_ratings_sea_to_sky_CLEANED.csv'  
   
-# define absolute path to raw data files
+# define absolute path to cleaned data files
 current_conditions_path = os.path.join(raw_data_root_path, current_conditions_file)
 current_plus1_conditions_path = os.path.join(raw_data_root_path, current_plus1_conditions_file)
 current_plus2_conditions_path = os.path.join(raw_data_root_path, current_plus2_conditions_file) 
 
-# load raw data to dataframe, parse dates as datetime index
-df_raw_current = pd.read_csv(current_conditions_path, parse_dates=['date_valid'])
-df_raw_current_plus1 = pd.read_csv(current_plus1_conditions_path, parse_dates=['date_valid'])
-df_raw_current_plus2 = pd.read_csv(current_plus2_conditions_path, parse_dates=['date_valid'])
-
-
-# In[7]:
-
-
-df_raw_current.to_csv('test.csv', index=False)
-
-
-# ## Clean Dataset
-
-# In[ ]:
-
-
-# list of dataframes to clean
-dataframes = [df_raw_current, df_raw_current_plus1, df_raw_current_plus2]
-
-# check for percent missing values for each dataframe
-for df, name in zip(dataframes, ['current', 'current+1', 'current+2']):
-    percent_missing(df, name)
-    
-# # replace zero values with NaN and remove any row that has NaN value for avalanche status
-for df in dataframes:
-    df.replace(0.0, np.nan, inplace=True)
-    df.dropna(subset=['alpine_status_code', 'treeline_status_code', 'belowtree_status_code'], inplace=True)
-    
-# remove extra row in current day forecast
-df_raw_current.drop(columns=['Unnamed: 8'], inplace=True)
-
-# replace missing problem text with No Text statement
-df_raw_current['problems'].replace(np.nan, 'No Text', inplace=True)
-
-# assign dataframes to new processed dataframe
-df_cleaned_current = df_raw_current
-df_cleaned_current_plus1 = df_raw_current_plus1
-df_cleaned_current_plus2 = df_raw_current_plus2
-
-# save cleaned dataset
-df_cleaned_current.to_csv('../data/cleaned/current_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
-df_cleaned_current_plus1.to_csv('../data/cleaned/current_plus1_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
-df_cleaned_current_plus2.to_csv('../data/cleaned/current_plus2_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
+# load raw data to dataframe, parse dates as datetime
+df_cleaned_current = pd.read_csv(current_conditions_path, parse_dates=['date_valid'])
+df_cleaned_current_plus1 = pd.read_csv(current_plus1_conditions_path, parse_dates=['date_valid'])
+df_cleaned_current_plus2 = pd.read_csv(current_plus2_conditions_path, parse_dates=['date_valid'])
 
 
 # ## Explore Data
 
-# In[ ]:
-
-
-df_cleaned_current = pd.read_csv('../data/cleaned/current_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
-df_cleaned_current_plus1 = pd.read_csv('../data/cleaned/current_plus1_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
-df_cleaned_current_plus2 = pd.read_csv('../data/cleaned/current_plus2_avalanche_danger_ratings_sea_to_sky_2011_2012.csv')
-
-
 # #### Custom Colormap
 
-# In[ ]:
+# In[13]:
 
 
 colors = [(82/255, 186/255, 74/255), (255/255, 243/255, 0/255), (247/255, 146/255, 24/255), 
@@ -145,7 +93,7 @@ colors = [(82/255, 186/255, 74/255), (255/255, 243/255, 0/255), (247/255, 146/25
 
 # #### Visualization of "Day of Conditions" in Sea to Sky Region 2011-2020
 
-# In[ ]:
+# In[112]:
 
 
 # percent occurence of each avalanche condition for each elevation
@@ -196,14 +144,14 @@ for i, col in enumerate(avy_perc_occur_all_elev):
         ax[i].legend(wedges, status_labels, title="Danger Rating", loc='center left', 
                      bbox_to_anchor=(-0.7, 0.25, 0.5, 0.5), prop=dict(size=12))
 # notes about dataset       
-ax[2].text(-2, -2, '*No extreme days below treeline from 2011 to 2020 \n **Extreme days in Alpine/Treeline are rare')
+ax[2].text(-2, -2.2, '*No extreme days below treeline from 2011 to 2020 \n\nThis data is not meant to inform avalanche decision making and \nshould not be relied upon')
 
 plt.savefig('../figures/avalanche-danger-ratings-sea-to-sky-2011-2020.png')
 
 
 # #### Visualization of "Day of Conditions" by year
 
-# In[ ]:
+# In[73]:
 
 
 # list of years in dataset
@@ -260,7 +208,7 @@ for i, df in enumerate([df_alpine, df_treeline, df_belowtree]):
         
     ax[i].set_xticks(x)
     ax[i].set_xticklabels(year_labels)
-    ax[i].set_title('{} Danger Ratings by Season (Sea to Sky Region)'.format(title_label[i]))
+    ax[i].set_title('{} Danger Ratings by Season (Sea to Sky Region: November through April)'.format(title_label[i]))
     ax[i].set_ylabel('Percentage of Season (%)')
     ax[i].grid(zorder=0)
 
@@ -270,12 +218,14 @@ ax[0].text(-0.5,37,'Last moderate \nstrength La Nina')
 
 fig.tight_layout(pad=2)
 
+ax[2].text(-0.5, -15, '*This data is not meant to inform avalanche decision making and should not be relied upon')
+
 plt.savefig('../figures/avalanche-danger-ratings-by-season-sea-to-sky-2011-2020.png')
 
 
 # #### Visualization of "Day of Conditions" by month
 
-# In[ ]:
+# In[74]:
 
 
 # list of months in dataset
@@ -336,6 +286,8 @@ ax[0].set_ylim([0, 70])
 
 fig.tight_layout(pad=2)
 
+ax[2].text(-0.5, -15, '*This data is not meant to inform avalanche decision making and should not be relied upon')
+
 plt.savefig('../figures/avalanche-danger-ratings-by-month-sea-to-sky-2011-2020.png')
 
 
@@ -343,7 +295,7 @@ plt.savefig('../figures/avalanche-danger-ratings-by-month-sea-to-sky-2011-2020.p
 
 # #### Most common avalanche problems
 
-# In[ ]:
+# In[78]:
 
 
 # types of problems to search in text based on Simon Fraser document
@@ -373,12 +325,14 @@ ax.set_title('Most Common Avalanche Problems (Sea to Sky Region: 2011-2020)')
 ax.text(150,0.1,'*Based on problem text as written by forecasters. \n This is an estimate and actual counts may differ.')
 ax.grid(zorder=0)
 
+ax.text(0, -1.7, '*This data is not meant to inform avalanche decision making and should not be relied upon')
+
 plt.savefig('../figures/frequency-of-avalanche-problem-types-sea-to-sky-2011-2020.png')
 
 
 # #### Danger Rating Forecast Anomaly
 
-# In[ ]:
+# In[121]:
 
 
 # merge day of and forecasted datasets
@@ -449,28 +403,24 @@ ax = ax.flatten()
 # create heatmaps
 for i, df in enumerate(df_list):
 
-    ax[i] = sns.heatmap(df, annot=df, fmt='.3g', cmap='mako_r', cbar=False, square=True, ax=ax[i])
+    ax[i] = sns.heatmap(df, annot=df, fmt='.3g', cmap='mako_r', cbar=False, square=True, ax=ax[i], vmin=0, vmax=100)
     
-    ax[i].set_xlabel('Forecasted Danger Rating')
     for t in ax[i].texts: 
         t.set_text(t.get_text() + "%")
         
     if i % 2 == 0:
         ax[i].text(-1.3,3,labels[i], rotation=90, fontweight='bold', fontsize='12')
-        ax[i].set_ylabel('Reported Danger Rating')
+        ax[i].set_ylabel('Day Of Danger Rating')
+        ax[i].set_xlabel('1-Day Out Forecasted Danger Rating')
+        
+    if i % 2 != 0:
+        ax[i].set_xlabel('2-Day Out Forecasted Danger Rating')
 
-ax[0].set_title('One Day Out Forecast Anomaly', fontweight='bold', fontsize='12')
-ax[1].set_title('Two Day Out Forecast Anomaly', fontweight='bold', fontsize='12')
+ax[0].text(1, -0.3, 'Forecast Danger Rating Anomaly (Sea to Sky Region: 2011-2020)', fontweight='bold', fontsize='12')
 
-ax[4].text(0, 7.5, 'Percentage of time a forecasted danger rating aligned or differed from a reported danger \nrating. For example, when a danger rating of 4 in the alpine was forecasted one day out \nthen 72.1% of the time the reported danger rating was 4.', fontsize='12')
+ax[4].text(0, 7.5, "Percentage a 1- and 2- day forecasted danger rating aligned or differed from a reported \ndanger rating. For example, when a danger rating of 4 in the alpine was forecasted 1-day \nout then 72.1% of the time the reported danger rating was 4. Note, a danger rating of 5 \nwas never forecasted 2-days out. This data is not meant to inform avalanche decision \nmaking and should not be relied upon", fontsize='12')
 
 plt.savefig('../figures/one_and_two_day_forecast_anomaly.png')
-
-
-# In[ ]:
-
-
-
 
 
 # In[ ]:
