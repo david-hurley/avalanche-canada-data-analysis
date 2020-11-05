@@ -24,8 +24,8 @@ For help or questions/comments contact [hurleyldave@gmail.com](hurleyldave@gmail
 ## Getting Started
 1. Clone this repo, instructions found [HERE](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 2. Open a command prompt and navigate to the newly cloned repo
-3. Create a virtual environment by executing `python -m venv venv` in a command prompt, instructions found [HERE](https://docs.python.org/3/library/venv.html)
-4. Activate the virtual environment, in Linux this is `source venv/bin/activate`
+3. Create a virtual environment by executing `python -m venv YOUR-VENV-NAME` in a command prompt and replace `YOUR-VENV-NAME` with whatever you like. Instructions found [HERE](https://docs.python.org/3/library/venv.html)
+4. Activate the virtual environment, in Linux this is `source YOUR-VENV-NAME/bin/activate`
 5. Install dependencies by executing `pip install -r requirements.txt` in a command prompt 
 
 ## Scraping Avalanche Canada Data
@@ -61,7 +61,7 @@ Jupyter Notebook to perform data analysis and data visualization on cleaned data
 
 Perform the following:
 1. Open a command prompt in the root directory
-2. Execute `ipython kernel install --user --name=venv`, replace `venv` with the name of your virtual environment
+2. Execute `ipython kernel install --user --name=YOUR-VENV-NAME`, replace `YOUR-VENV-NAME` with the name of your virtual environment
 3. Launch Jupyter Notebook (`jupyter notebook` in the command prompt) and navigate to `notebooks` and open file `2020_10_10_dh_clean_explore_data.ipynb`
 4. In the toolbar select `kernel` and choose `venv`
 5. Follow instruction in notebook to point to desired cleaned files and run code
